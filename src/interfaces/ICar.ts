@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { IVehicle } from './IVehicle';
+import { IVehicle, VehicleZodSchema } from './IVehicle';
 
-export const CarZodSchema = z.object({
+export const CarZodSchema = VehicleZodSchema.extend({
   doorsQty: z.number({
     invalid_type_error: 'Doors Qty must be a number',
   })
