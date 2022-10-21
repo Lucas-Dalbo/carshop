@@ -3,7 +3,6 @@ import chai from 'chai';
 import CarModel from '../../../models/CarModel';
 import mongoose from 'mongoose';
 import { carMock, carMockWithId } from '../../mocks/carMocks';
-import { errorsCatalog } from '../../../errors/catalog';
 const { expect } = chai;
 
 describe('Car Model', () => {
