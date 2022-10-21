@@ -16,8 +16,8 @@ describe('Car Model', () => {
     sinon.restore();
   });
 
-  describe('Add a new Car', () => {
-    it('With succsess', async () => {
+  describe('Create a new Car', () => {
+    it('With success', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(true);
       const result = await carModel.create(carMock);
       expect(result).to.be.deep.eq(carMockWithId);
