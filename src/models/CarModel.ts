@@ -10,10 +10,10 @@ const carSchema = new Schema<ICar>({
   buyValue: Number,
 });
 
-class Car extends MongoModel<ICar> {
+class CarModel extends MongoModel<ICar> {
   constructor(model = mongooseModel('Car', carSchema)) {
     super(model);
   }
 }
 
-export default Car;
+export default CarModel;
