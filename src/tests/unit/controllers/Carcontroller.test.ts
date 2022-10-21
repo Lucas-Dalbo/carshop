@@ -8,7 +8,7 @@ const { expect } = chai;
 
 describe('Car controller', () => {
   const carService = new CarService();
-  const carControler = new CarController(carService);
+  const carController = new CarController(carService);
 
   const req = {} as Request;
   const res = {} as Response;
@@ -27,7 +27,7 @@ describe('Car controller', () => {
   describe('Create a new car', () => {
     it('With success', async () => {
       req.body = carMock;
-      await carControler.create(req, res);
+      await carController.create(req, res);
       const status = res.status as sinon.SinonStub;
       const json = res.json as sinon.SinonStub;
 
