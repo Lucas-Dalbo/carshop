@@ -18,3 +18,25 @@ export const carMockWithId = {
   doorsQty: 2,
   seatsQty: 3,
 };
+
+export const allCarsMock = [
+  {
+    _id: '62cf1fc6498565d94eba52cd',
+    model: 'Kombi',
+    year: 1989,
+    color: 'white',
+    status: true,
+    buyValue: 5000,
+    doorsQty: 2,
+    seatsQty: 3,
+  }, {
+    _id: '62cf1fc6498565d94eba55cd',
+    model: 'Corsa',
+    year: 1999,
+    color: 'red',
+    status: false,
+    buyValue: 9999,
+    doorsQty: 4,
+    seatsQty: 5,
+  }
+];
