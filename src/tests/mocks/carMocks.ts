@@ -40,3 +40,24 @@ export const allCarsMock = [
     seatsQty: 5,
   }
 ];
+
+export const carMockUpdate = {
+  model: 'Kombi',
+  year: 2000,
+  color: 'blue',
+  status: true,
+  buyValue: 8000,
+  doorsQty: 2,
+  seatsQty: 5,
+};
+
+export const carMockUpdateWithId = {
+  _id: '62cf1fc6498565d94eba52cd',
+  model: 'Kombi',
+  year: 2000,
+  color: 'blue',
+  status: true,
+  buyValue: 8000,
+  doorsQty: 2,
+  seatsQty: 5,
+};

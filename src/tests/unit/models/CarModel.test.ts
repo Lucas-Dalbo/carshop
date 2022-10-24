@@ -2,7 +2,7 @@ import * as sinon from 'sinon';
 import chai from 'chai';
 import CarModel from '../../../models/CarModel';
 import mongoose from 'mongoose';
-import { allCarsMock, carMock, carMockWithId } from '../../mocks/carMocks';
+import { allCarsMock, carMock, carMockUpdate, carMockUpdateWithId, carMockWithId } from '../../mocks/carMocks';
 import { ErrorTypes } from '../../../errors/catalog';
 const { expect } = chai;
 
@@ -13,6 +13,8 @@ describe('Car Model', () => {
     sinon.stub(mongoose.Model, 'create').resolves(carMockWithId);
     sinon.stub(mongoose.Model, 'find').resolves(allCarsMock);
     sinon.stub(mongoose.Model, 'findOne').resolves(carMockWithId);
+    sinon.stub(mongoose.Model, 'findOneAndUpdate').resolves(carMockUpdateWithId);
+    sinon.stub(mongoose.Model, 'findOneAndDelete').resolves(carMockWithId);
   });
 
   afterEach(()=>{
@@ -46,6 +48,44 @@ describe('Car Model', () => {
       let err;
       try {
         await carModel.readOne('invalid-id');
+      } catch (error:any) {
+        err = error;
+      }
+      expect(err?.message).to.be.deep.eq(ErrorTypes.InvalidMongoId);
+    });
+  });
+
+  describe('Update a car', () => {
+    it('With success', async () => {
+      sinon.stub(mongoose, 'isValidObjectId').returns(true);
+      const result = await carModel.update('valid-id', carMockUpdate);
+      expect(result).to.be.deep.eq(carMockUpdateWithId);
+    });
+
+    it('With failure - Invalid Id', async () => {
+      sinon.stub(mongoose, 'isValidObjectId').returns(false);
+      let err;
+      try {
+        await carModel.update('invalid-id', carMock);
+      } catch (error:any) {
+        err = error;
+      }
+      expect(err?.message).to.be.deep.eq(ErrorTypes.InvalidMongoId);
+    });
+  })
+
+  describe('Delete a car', () => {
+    it('With success', async () => {
+      sinon.stub(mongoose, 'isValidObjectId').returns(true);
+      const result = await carModel.delete('valid-id');
+      expect(result).to.be.deep.eq(carMockWithId);
+    });
+
+    it('With failure - Invalid Id', async () => {
+      sinon.stub(mongoose, 'isValidObjectId').returns(false);
+      let err;
+      try {
+        await carModel.delete('invalid-id');
       } catch (error:any) {
         err = error;
       }
