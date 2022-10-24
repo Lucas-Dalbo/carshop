@@ -3,6 +3,7 @@ import chai from 'chai';
 import CarModel from '../../../models/CarModel';
 import mongoose from 'mongoose';
 import { allCarsMock, carMock, carMockWithId } from '../../mocks/carMocks';
+import { ErrorTypes } from '../../../errors/catalog';
 const { expect } = chai;
 
 describe('Car Model', () => {
@@ -18,7 +19,7 @@ describe('Car Model', () => {
     sinon.restore();
   });
 
-  describe('Create a new Car', () => {
+  describe('Create a new car', () => {
     it('With success', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(true);
       const result = await carModel.create(carMock);
@@ -26,14 +27,14 @@ describe('Car Model', () => {
     });
   });
 
-  describe('Read all Cars', () => {
+  describe('Read all cars', () => {
     it('With success', async () => {
       const result = await carModel.read();
       expect(result).to.be.deep.eq(allCarsMock);
     });
   });
 
-  describe('Read one Car', () => {
+  describe('Read one car', () => {
     it('With success', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(true);
       const result = await carModel.readOne('valid-id');
@@ -45,10 +46,10 @@ describe('Car Model', () => {
       let err;
       try {
         await carModel.readOne('invalid-id');
-      } catch (error) {
+      } catch (error:any) {
         err = error;
       }
-      expect(err).to.be.instanceOf(Error);
+      expect(err?.message).to.be.deep.eq(ErrorTypes.InvalidMongoId);
     });
   });
 });
