@@ -14,7 +14,6 @@ describe('Car Serivce', () => {
   beforeEach(async () => {
     sinon.stub(carModel, 'create').resolves(carMockWithId);
     sinon.stub(carModel, 'read').resolves(allCarsMock);
-    sinon.stub(carModel, 'update').resolves(carMockUpdateWithId);
   });
 
   afterEach(()=>{
@@ -73,20 +72,35 @@ describe('Car Serivce', () => {
 
   describe('Update a car', () => {
     it('With success', async () => {
+      sinon.stub(carModel, 'update').resolves(carMockUpdateWithId);
+
       const result = await carService.update('valid-id', carMockUpdate);
 
       expect(result).to.be.deep.eq(carMockUpdateWithId);
     });
 
     it('With failure - Zod', async () => {
-      let error;
+      let err;
       try {
         await carService.update('valid-id', {});
-      } catch (err) {
-        error = err;
+      } catch (error) {
+        err = error;
       }
 
-      expect(error).to.be.instanceOf(ZodError);
+      expect(err).to.be.instanceOf(ZodError);
+    });
+
+    it('With failure - Car not found', async () => {
+      sinon.stub(carModel, 'update').resolves(null);
+
+      let err;
+      try {
+        await carService.update('valid-id', carMockUpdate);
+      } catch (error:any) {
+        err = error;
+      }
+
+      expect(err?.message).to.be.deep.eq(ErrorTypes.EntityNotFound);
     });
   });
 

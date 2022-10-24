@@ -6,7 +6,7 @@ import { allCarsMock, carMock, carMockUpdate, carMockUpdateWithId, carMockWithId
 import { Request, Response } from 'express';
 const { expect } = chai;
 
-describe.only('Car controller', () => {
+describe('Car controller', () => {
   const carService = new CarService();
   const carController = new CarController(carService);
 
