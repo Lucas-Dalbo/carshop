@@ -39,5 +39,16 @@ describe('Car Model', () => {
       const result = await carModel.readOne('valid-id');
       expect(result).to.be.deep.eq(carMockWithId);
     });
+
+    it('With failure - Invalid Id', async () => {
+      sinon.stub(mongoose, 'isValidObjectId').returns(false);
+      let err;
+      try {
+        await carModel.readOne('invalid-id');
+      } catch (error) {
+        err = error;
+      }
+      expect(err).to.be.instanceOf(Error);
+    });
   });
 });
