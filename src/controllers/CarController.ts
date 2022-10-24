@@ -33,7 +33,7 @@ class CarController {
 
   public async update(
     req:Request,
-    res:Response,
+    res:Response<ICar>,
   ) {
     const { id } = req.params;
     const obj = { ...req.body };
