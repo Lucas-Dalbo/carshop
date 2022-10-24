@@ -24,7 +24,9 @@ describe('Car Model', () => {
   describe('Create a new car', () => {
     it('With success', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(true);
+      
       const result = await carModel.create(carMock);
+
       expect(result).to.be.deep.eq(carMockWithId);
     });
   });
@@ -32,6 +34,7 @@ describe('Car Model', () => {
   describe('Read all cars', () => {
     it('With success', async () => {
       const result = await carModel.read();
+
       expect(result).to.be.deep.eq(allCarsMock);
     });
   });
@@ -39,18 +42,22 @@ describe('Car Model', () => {
   describe('Read one car', () => {
     it('With success', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(true);
+
       const result = await carModel.readOne('valid-id');
+
       expect(result).to.be.deep.eq(carMockWithId);
     });
 
     it('With failure - Invalid Id', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(false);
+
       let err;
       try {
         await carModel.readOne('invalid-id');
       } catch (error:any) {
         err = error;
       }
+
       expect(err?.message).to.be.deep.eq(ErrorTypes.InvalidMongoId);
     });
   });
@@ -58,18 +65,22 @@ describe('Car Model', () => {
   describe('Update a car', () => {
     it('With success', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(true);
+
       const result = await carModel.update('valid-id', carMockUpdate);
+
       expect(result).to.be.deep.eq(carMockUpdateWithId);
     });
 
     it('With failure - Invalid Id', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(false);
+
       let err;
       try {
         await carModel.update('invalid-id', carMock);
       } catch (error:any) {
         err = error;
       }
+
       expect(err?.message).to.be.deep.eq(ErrorTypes.InvalidMongoId);
     });
   })
@@ -77,18 +88,22 @@ describe('Car Model', () => {
   describe('Delete a car', () => {
     it('With success', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(true);
+
       const result = await carModel.delete('valid-id');
+
       expect(result).to.be.deep.eq(carMockWithId);
     });
 
     it('With failure - Invalid Id', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(false);
+
       let err;
       try {
         await carModel.delete('invalid-id');
       } catch (error:any) {
         err = error;
       }
+
       expect(err?.message).to.be.deep.eq(ErrorTypes.InvalidMongoId);
     });
   });
