@@ -14,11 +14,11 @@ export type ErrorCatalog = {
 
 export const errorsCatalog:ErrorCatalog = {
   InvalidMongoId: {
-    message: 'Id must be a 24 characters hexadecimal',
+    message: 'Id must have 24 hexadecimal characters',
     status: 400,
   },
   EntityNotFound: {
-    message: 'Entity not found',
+    message: 'Object not found',
     status: 404,
   },
 };

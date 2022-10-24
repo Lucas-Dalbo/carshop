@@ -17,7 +17,7 @@ const errorHandler:ErrorRequestHandler = (
 
   if (catalogError) {
     const { message, status } = catalogError;
-    return res.status(status).json({ message });
+    return res.status(status).json({ error: message });
   }
 
   console.log(err);
