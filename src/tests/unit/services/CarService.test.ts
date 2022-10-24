@@ -2,7 +2,7 @@ import * as sinon from 'sinon';
 import chai from 'chai';
 import CarService from '../../../services/CarService';
 import CarModel from '../../../models/CarModel';
-import { allCarsMock, carMock, carMockWithId } from '../../mocks/carMocks';
+import { allCarsMock, carMock, carMockUpdate, carMockUpdateWithId, carMockWithId } from '../../mocks/carMocks';
 import { ZodError } from 'zod';
 import { ErrorTypes } from '../../../errors/catalog';
 const { expect } = chai;
@@ -14,6 +14,7 @@ describe('Car Serivce', () => {
   beforeEach(async () => {
     sinon.stub(carModel, 'create').resolves(carMockWithId);
     sinon.stub(carModel, 'read').resolves(allCarsMock);
+    sinon.stub(carModel, 'update').resolves(carMockUpdateWithId);
   });
 
   afterEach(()=>{
@@ -55,7 +56,43 @@ describe('Car Serivce', () => {
       sinon.stub(carModel, 'readOne').resolves(null);
       let err;
       try {
-        await carService.readOne('existing-id');
+        await carService.readOne('unexisting-id');
+      } catch (error:any) {
+        err = error;
+      }
+      expect(err?.message).to.be.deep.eq(ErrorTypes.EntityNotFound);
+    });
+  });
+
+  describe('Update a car', () => {
+    it('With success', async () => {
+      const result = await carService.update('valid-id', carMockUpdate);
+      expect(result).to.be.deep.eq(carMockUpdateWithId);
+    });
+
+    it('With failure - Zod', async () => {
+      let error;
+      try {
+        await carService.update('valid-id', {});
+      } catch (err) {
+        error = err;
+      }
+      expect(error).to.be.instanceOf(ZodError);
+    });
+  });
+
+  describe('Delete a car', () => {
+    it('With success', async () => {
+      sinon.stub(carModel, 'delete').resolves(carMockWithId);
+      const result = await carService.delete('existing-id');
+      expect(result).to.be.deep.eq(carMockWithId);
+    });
+
+    it('With failure - Car not found', async () => {
+      sinon.stub(carModel, 'delete').resolves(null);
+      let err;
+      try {
+        await carService.delete('unexisting-id');
       } catch (error:any) {
         err = error;
       }
