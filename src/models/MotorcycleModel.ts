@@ -8,7 +8,7 @@ const motorcycleSchema = new Schema<IMotorcycle>({
   year: Number,
   color: String,
   buyValue: Number,
-  category: Number,
+  category: String,
   engineCapacity: Number,
 }, { versionKey: false });
 
