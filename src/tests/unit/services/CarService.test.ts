@@ -7,7 +7,7 @@ import { ZodError } from 'zod';
 import { ErrorTypes } from '../../../errors/catalog';
 const { expect } = chai;
 
-describe('Car Serivce', () => {
+describe('Car Service', () => {
   const carModel = new CarModel();
   const carService = new CarService(carModel);
 
