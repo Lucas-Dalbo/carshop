@@ -9,8 +9,8 @@ class MotorcycleController {
     req:Request,
     res:Response<IMotorcycle>,
   ) {
-    const carData = { ...req.body };
-    const result = await this._service.create(carData);
+    const motorData = { ...req.body };
+    const result = await this._service.create(motorData);
     res.status(201).json(result);
   }
 
