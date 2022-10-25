@@ -22,7 +22,7 @@ describe('Motorcycle Model', () => {
     sinon.restore();
   });
 
-  describe('Create a new motorcyle', () => {
+  describe('Create a new motorcycle', () => {
     it('With success', async () => {
       sinon.stub(mongoose, 'isValidObjectId').returns(true);
       
