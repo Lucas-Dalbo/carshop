@@ -65,7 +65,7 @@ describe('Motorcycle controller', () => {
     });
   });
 
-  describe('Update a motrocycle', () => {
+  describe('Update a motorcycle', () => {
     it('With success', async () => {
       req.params = { id: 'valid' };
       req.body = motorcycleMock;
@@ -79,7 +79,7 @@ describe('Motorcycle controller', () => {
     });
   });
 
-  describe('Delete a motrocycle', () => {
+  describe('Delete a motorcycle', () => {
     it('With success', async () => {
       req.params = { id: 'valid' };
       await controller.delete(req, res);
