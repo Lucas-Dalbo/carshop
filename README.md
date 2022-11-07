@@ -34,8 +34,8 @@ A API foi testada utilizando mocha, sinon e chai, como foco em testes de unidade
 
 ---
 ## O que foi utilizado?
- - TypeScript;
  - Node.js com Express;
+ - TypeScript;
  - MongoDB com Mongoose;
  - Validações com ZOD;
  - POO e SOLID;
