@@ -6,7 +6,9 @@ This project was developed for the back-end module at Trybe!
 ---
 ## About the project
 This project goal was to build an API for Vehicles, using mongoDB with mongoose and TypeScript.
+
 For API structure, it was used OOP following the SOLID principles.
+
 The API was tested using mocha, sinon and chai, focusing on unit tests.
 
 ---
