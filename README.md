@@ -6,7 +6,9 @@ Este projeto foi desenvolvido enquanto estudante da Trybe no módulo de Back-End
 ---
 ## Sobre o projeto
 O objetivo do projeto era construir uma API para registro de Veículos, utilizando o mongoDB com mongoose e TypeScript.
+
 Para estruturação da API, foi utilizada a Programação Orientada a Objetos (POO) seguidos os princípios do SOLID.
+
 A API foi testada utilizando mocha, sinon e chai, como foco em testes de unidade (unit tests).
 
 ---
