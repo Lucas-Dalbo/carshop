@@ -1,4 +1,4 @@
-[Leia em Português!](./README-Eng.md)
+[Leia em Português!](./README.md)
 
 # Carshop-DB Project
 This project was developed for the back-end module at Trybe!
